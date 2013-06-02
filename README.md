@@ -1,7 +1,8 @@
-Default RSS App Switcher
-===============
+# Default RSS App Switcher
 
 Mac OS X utility for changing the default app that handles RSS feeds from Safari.
+
+![Screenshot](screenshot.png)
 
 ## Instructions
 - Select an app from the **Available RSS Apps** list to handle RSS feeds from Safari.
