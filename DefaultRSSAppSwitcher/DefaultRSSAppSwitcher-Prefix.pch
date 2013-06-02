@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'Default RSS App Switcher' target in the 'Default RSS App Switcher' project
+//
+
+#ifdef __OBJC__
+    #import <Cocoa/Cocoa.h>
+#endif
