@@ -15,7 +15,6 @@
 		049E1EB4175A40CD007B0437 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 049E1EB2175A40CD007B0437 /* Credits.rtf */; };
 		049E1EB7175A40CD007B0437 /* BJLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 049E1EB6175A40CD007B0437 /* BJLAppDelegate.m */; };
 		049E1EBA175A40CD007B0437 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 049E1EB8175A40CD007B0437 /* MainMenu.xib */; };
-		049E1EC2175A40CD007B0437 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 049E1EC1175A40CD007B0437 /* SenTestingKit.framework */; };
 		049E1EC3175A40CD007B0437 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 049E1EA3175A40CC007B0437 /* Cocoa.framework */; };
 		049E1ECB175A40CD007B0437 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 049E1EC9175A40CD007B0437 /* InfoPlist.strings */; };
 		049E1EDA175A411C007B0437 /* BJLRSSAppSwitcherWC.m in Sources */ = {isa = PBXBuildFile; fileRef = 049E1ED8175A411C007B0437 /* BJLRSSAppSwitcherWC.m */; };
@@ -52,7 +51,6 @@
 		049E1EB6175A40CD007B0437 /* BJLAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BJLAppDelegate.m; sourceTree = "<group>"; };
 		049E1EB9175A40CD007B0437 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		049E1EC0175A40CD007B0437 /* DefaultRSSAppSwitcherTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DefaultRSSAppSwitcherTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		049E1EC1175A40CD007B0437 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		049E1EC8175A40CD007B0437 /* DefaultRSSAppSwitcherTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DefaultRSSAppSwitcherTests-Info.plist"; sourceTree = "<group>"; };
 		049E1ECA175A40CD007B0437 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		049E1ED7175A411C007B0437 /* BJLRSSAppSwitcherWC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BJLRSSAppSwitcherWC.h; sourceTree = "<group>"; };
@@ -75,7 +73,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				049E1EC2175A40CD007B0437 /* SenTestingKit.framework in Frameworks */,
 				049E1EC3175A40CD007B0437 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -106,7 +103,6 @@
 			isa = PBXGroup;
 			children = (
 				049E1EA3175A40CC007B0437 /* Cocoa.framework */,
-				049E1EC1175A40CD007B0437 /* SenTestingKit.framework */,
 				049E1EA5175A40CC007B0437 /* Other Frameworks */,
 			);
 			name = Frameworks;
@@ -208,7 +204,7 @@
 			name = DefaultRSSAppSwitcherTests;
 			productName = DefaultRSSAppSwitcherTests;
 			productReference = 049E1EC0175A40CD007B0437 /* DefaultRSSAppSwitcherTests.octest */;
-			productType = "com.apple.product-type.bundle.ocunit-test";
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -217,6 +213,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = BJL;
+				LastTestingUpgradeCheck = 0630;
 				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = "Bryan Luby";
 			};
@@ -429,13 +426,15 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/DefaultRSSAppSwitcher.app/Contents/MacOS/DefaultRSSAppSwitcher";
 				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+					"$(inherited)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DefaultRSSAppSwitcher/DefaultRSSAppSwitcher-Prefix.pch";
 				INFOPLIST_FILE = "DefaultRSSAppSwitcherTests/DefaultRSSAppSwitcherTests-Info.plist";
 				PRODUCT_NAME = DefaultRSSAppSwitcherTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
 		};
@@ -444,13 +443,15 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/DefaultRSSAppSwitcher.app/Contents/MacOS/DefaultRSSAppSwitcher";
 				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+					"$(inherited)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DefaultRSSAppSwitcher/DefaultRSSAppSwitcher-Prefix.pch";
 				INFOPLIST_FILE = "DefaultRSSAppSwitcherTests/DefaultRSSAppSwitcherTests-Info.plist";
 				PRODUCT_NAME = DefaultRSSAppSwitcherTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
 		};

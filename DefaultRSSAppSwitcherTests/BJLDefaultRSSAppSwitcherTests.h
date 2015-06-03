@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 Bryan Luby. All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 
-@interface BJLDefaultRSSAppSwitcherTests : SenTestCase
+@interface BJLDefaultRSSAppSwitcherTests : XCTestCase
 
 @end

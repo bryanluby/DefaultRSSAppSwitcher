@@ -12,7 +12,7 @@
 
 - (void)testReallyHardMath
 {
-    STAssertTrue(1 + 1 == 2, @"Uh oh...");
+    XCTAssertTrue(1 + 1 == 2, @"Uh oh...");
 }
 
 @end
