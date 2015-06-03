@@ -10,12 +10,14 @@
 #import "BJLRSSApp.h"
 
 @interface BJLRSSAppStore ()
+
 @property CFStringRef feedScheme;
+
 @end
 
 @implementation BJLRSSAppStore
 
-- (id)init
+- (instancetype)init
 {
     self = [super init];
     if (self) {
@@ -46,9 +48,10 @@
             [availableRSSApps addObject:newApp];
         }
     }
-    
-    [availableRSSApps sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"appName"
-                                                                           ascending:YES]]];
+
+    NSSortDescriptor *appNameDescriptor = [NSSortDescriptor sortDescriptorWithKey:NSStringFromSelector(@selector(appName))
+                                                                        ascending:YES];
+    [availableRSSApps sortUsingDescriptors:@[appNameDescriptor]];
     
     return [availableRSSApps copy];
 }

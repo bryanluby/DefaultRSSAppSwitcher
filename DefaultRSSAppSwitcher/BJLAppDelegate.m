@@ -10,7 +10,9 @@
 #import "BJLRSSAppSwitcherWC.h"
 
 @interface BJLAppDelegate ()
+
 @property (strong) BJLRSSAppSwitcherWC *windowController;
+
 @end
 
 @implementation BJLAppDelegate

@@ -10,11 +10,13 @@
 #import "BJLRSSApp.h"
 #import "BJLRSSAppStore.h"
 
-@interface BJLRSSAppSwitcherWC ()
+@interface BJLRSSAppSwitcherWC () <NSTableViewDataSource, NSTableViewDelegate>
+
 @property (weak) IBOutlet NSTableView *availableRSSAppsTableView;
 @property (copy) NSArray *availableRSSApps;
 @property (strong) BJLRSSAppStore *rssStore;
 @property (weak) IBOutlet NSButton *switchDefaultAppButton;
+
 @end
 
 @implementation BJLRSSAppSwitcherWC
@@ -24,9 +26,10 @@
 - (void)windowDidLoad
 {
     [super windowDidLoad];
+
     self.rssStore = [[BJLRSSAppStore alloc] init];
     [self refreshAppList];
-    [self.availableRSSAppsTableView setDoubleAction:@selector(tableRowDoubleClicked:)];
+    self.availableRSSAppsTableView.doubleAction = @selector(tableRowDoubleClicked:);
 }
 
 - (void)refreshAppList
@@ -38,10 +41,11 @@
 
 - (void)configureAppSwitchButtonState
 {
-    if ([self.availableRSSAppsTableView selectedRow] == -1) {
-        [self.switchDefaultAppButton setEnabled:NO];
-    } else
-        [self.switchDefaultAppButton setEnabled:YES];
+    if (self.availableRSSAppsTableView.selectedRow == -1) {
+        self.switchDefaultAppButton.enabled = NO;
+    } else {
+        self.switchDefaultAppButton.enabled = YES;
+    }
 }
 
 #pragma mark - IBActions
@@ -58,8 +62,10 @@
 
 - (void)changeDefaultRSSApp
 {
-    NSInteger selectedRow = [self.availableRSSAppsTableView selectedRow];
-    if (selectedRow == -1) return;
+    NSInteger selectedRow = self.availableRSSAppsTableView.selectedRow;
+    if (selectedRow == -1) {
+        return;
+    }
     
     BJLRSSApp *selectedApp = self.availableRSSApps[selectedRow];
     
@@ -77,7 +83,7 @@
 
 - (void)keyDown:(NSEvent *)theEvent
 {
-    if ([self.availableRSSAppsTableView selectedRow] != -1 && [theEvent keyCode] == 36) {
+    if (self.availableRSSAppsTableView.selectedRow != -1 && theEvent.keyCode == 36) {
         [self changeDefaultRSSApp];
     }
 }
@@ -86,24 +92,24 @@
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
-    return [self.availableRSSApps count];
+    return self.availableRSSApps.count;
 }
 
-- (id)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
+- (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
-    NSString *identifier = [tableColumn identifier];
+    NSString *identifier = tableColumn.identifier;
     NSTableCellView *cellView = [tableView makeViewWithIdentifier:identifier owner:self];
     
     BJLRSSApp *rssApp = self.availableRSSApps[row];
-    [cellView.imageView setImage:rssApp.appIcon];
+    cellView.imageView.image = rssApp.appIcon;
     
     NSTextField *textField = cellView.textField;
     if (rssApp.isDefaultRSSApp) {
-        [textField setStringValue:[NSString stringWithFormat:@"%@ (Current Default)", rssApp.appName]];
-        [textField setFont:[NSFont boldSystemFontOfSize:17]];
+        textField.stringValue = [NSString stringWithFormat:@"%@ (Current Default)", rssApp.appName];
+        textField.font = [NSFont boldSystemFontOfSize:17];
     } else {
-        [textField setStringValue:rssApp.appName];
-        [textField setFont:[NSFont systemFontOfSize:17]];
+        textField.stringValue = rssApp.appName;
+        textField.font = [NSFont systemFontOfSize:17];
     }
     
     return cellView;

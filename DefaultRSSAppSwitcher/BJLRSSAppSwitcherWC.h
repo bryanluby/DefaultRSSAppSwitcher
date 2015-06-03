@@ -8,6 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface BJLRSSAppSwitcherWC : NSWindowController <NSTableViewDataSource, NSTableViewDelegate>
+@interface BJLRSSAppSwitcherWC : NSWindowController
 
 @end
